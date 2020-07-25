@@ -1,9 +1,9 @@
 ﻿using Blog.Core.Model;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Blog.Core.IRepository.Base
@@ -16,6 +16,8 @@ namespace Blog.Core.IRepository.Base
         Task<List<TEntity>> QueryByIDs(object[] lstIds);
 
         Task<int> Add(TEntity model);
+
+        Task<int> Add(List<TEntity> listEntity);
 
         Task<bool> DeleteById(object id);
 
@@ -38,6 +40,8 @@ namespace Blog.Core.IRepository.Base
 
         Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression, int intTop, string strOrderByFileds);
         Task<List<TEntity>> Query(string strWhere, int intTop, string strOrderByFileds);
+        Task<List<TEntity>> QuerySql(string strSql, SugarParameter[] parameters = null);
+        Task<DataTable> QueryTable(string strSql, SugarParameter[] parameters = null);
 
         Task<List<TEntity>> Query(
             Expression<Func<TEntity, bool>> whereExpression, int intPageIndex, int intPageSize, string strOrderByFileds);
